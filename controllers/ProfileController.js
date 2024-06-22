@@ -117,7 +117,7 @@ exports.saveProfile = async(req,res) =>
       let token =  jwt.sign(payload, 
           process.env.JWT_SECRET,
           {
-              expiresIn:"2h",
+              expiresIn:"5h",
           });
 
           
@@ -127,6 +127,9 @@ exports.saveProfile = async(req,res) =>
       const options = {
           expires: new Date( Date.now() + 3*24*60*60*1000),
           httpOnly:true,
+          secure: true, // Ensure the cookie is only used with HTTPS
+          sameSite: 'None' // Ensure the cookie is sent in cross-site requests
+
       }
 
     // creating a cookie & sending  in the response 
