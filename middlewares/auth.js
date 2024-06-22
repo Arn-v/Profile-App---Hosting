@@ -9,7 +9,7 @@ exports.auth = (req, res, next) =>
        
         const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "");
 
-        console.log("token extracted" , token) ; 
+        console.log( token) ; 
         
         if(!token || token === undefined) {
             return res.status(401).json({
@@ -34,7 +34,7 @@ exports.auth = (req, res, next) =>
             });
         }
 
-        console.log("JWT payload" , payload)  ;
+        console.log( payload)  ;
         console.log("user authenticated") ; 
 
       //nest middleware or handler
