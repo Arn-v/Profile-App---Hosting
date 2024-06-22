@@ -4,7 +4,6 @@ const app = express() ;
 
 
 
-
 require("dotenv").config() ;
 const PORT = process.env.PORT || 8000 ; 
 
@@ -17,31 +16,33 @@ app.use(cookieParser());
 
 const cors = require("cors") ;
 
-const allowedOrigins = [
-    'https://profile-orcin-gamma.vercel.app'
-  ];
+// const allowedOrigins = [
+//     'https://profile-orcin-gamma.vercel.app'
+//   ];
 
-const corsOptions = {
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-  };
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true
+//   };
 
-app.use( cors(corsOptions) ) ; 
+// app.use( cors(corsOptions) ) ; 
 
 
-// app.use( cors( {
-//                 origin: 'https://profile-orcin-gamma.vercel.app/',
-//                 methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//                 credentials: true,
-//             }
-//          )) ; 
+app.use( cors( {
+                origin: 'https://profile-orcin-gamma.vercel.app/',
+                methods: ['GET', 'POST', 'PUT', 'DELETE'],
+                credentials: true,
+            }
+         )) ; 
+
+
 
 
 
