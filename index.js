@@ -16,7 +16,12 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 const cors = require("cors") ; 
-app.use(cors()) ; 
+
+app.use( cors( {
+                origin: 'https://profile-orcin-gamma.vercel.app/',
+                methods: ['GET', 'POST', 'PUT', 'DELETE'],
+                credentials: true,
+  }) ) ; 
 
 
 
