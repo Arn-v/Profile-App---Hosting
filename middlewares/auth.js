@@ -8,6 +8,8 @@ exports.auth = (req, res, next) =>
         //extract JWT token from req to validate user 
        
         const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "");
+
+        console.log("token extracted" , token) ; 
         
         if(!token || token === undefined) {
             return res.status(401).json({
@@ -32,7 +34,7 @@ exports.auth = (req, res, next) =>
             });
         }
 
-
+        console.log("JWT payload" , payload)  ;
         console.log("user authenticated") ; 
 
       //nest middleware or handler
