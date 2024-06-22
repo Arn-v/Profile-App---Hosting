@@ -20,27 +20,28 @@ const cors = require("cors") ;
 //     'https://profile-orcin-gamma.vercel.app'
 //   ];
 
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true
+//   };
+
+// app.use( cors(corsOptions) ) ; 
+
+
+const allowedOrigin = 'https://profile-orcin-gamma.vercel.app'; // Update with your frontend URL
+
 const corsOptions = {
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: allowedOrigin,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-  };
-
-app.use( cors(corsOptions) ) ; 
-
-
-// app.use( cors( {
-//                 origin: 'https://profile-orcin-gamma.vercel.app/',
-//                 methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//                 credentials: true,
-//             }
-//          )) ; 
+    credentials: true, // Allow credentials (cookies, authorization headers)
+};
 
 
 app.use(function (request, response, next) {
