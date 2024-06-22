@@ -16,39 +16,39 @@ app.use(cookieParser());
 
 const cors = require("cors") ;
 
-// const allowedOrigins = [
-//     'https://profile-orcin-gamma.vercel.app'
-//   ];
-
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error('Not allowed by CORS'));
-//       }
-//     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     credentials: true
-//   };
-
-// app.use( cors(corsOptions) ) ; 
-
-
-const allowedOrigin = 'https://profile-orcin-gamma.vercel.app'; // Update with your frontend URL
+const allowedOrigins = [
+    'https://profile-orcin-gamma.vercel.app'
+  ];
 
 const corsOptions = {
-    origin: allowedOrigin,
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Allow credentials (cookies, authorization headers)
-};
+    credentials: true
+  };
+
+app.use( cors(corsOptions) ) ; 
 
 
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// const allowedOrigin = 'https://profile-orcin-gamma.vercel.app'; // Update with your frontend URL
+
+// const corsOptions = {
+//     origin: allowedOrigin,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true, // Allow credentials (cookies, authorization headers)
+// };
+
+
+// app.use(function (request, response, next) {
+//     response.header("Access-Control-Allow-Origin", "*");
+//     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 
 
