@@ -68,11 +68,11 @@ exports.saveProfile = async(req,res) =>
     // VALIDATION LEFT 
 
 
-    const userProfile = await User.findOne( { email:email } )
+    const userProfile = await User.findOne( )
 
    if( userProfile )
      { 
-      const updatedProfile = await User.findOneAndUpdate( {email:email}, newProfileData , { new:true }) ; 
+      const updatedProfile = await User.findAndUpdate( {} , newProfileData , { new:true }) ; 
 
       //successful response case
       res.status(200).json({ success:true, 
