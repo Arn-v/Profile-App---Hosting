@@ -28,8 +28,7 @@ exports.auth = (req, res, next) =>
          } 
 
 
-        
-
+    
         catch(error) {
             return res.status(401).json({
                 success:false,
@@ -37,7 +36,6 @@ exports.auth = (req, res, next) =>
             });
         }
 
-        console.log( payload)  ;
         console.log("user authenticated") ; 
 
       //nest middleware or handler

@@ -12,7 +12,11 @@ exports.validateUserProfile = [
         .isEmail().withMessage('Email must be valid'),
     check('profileData.address')
         .notEmpty().withMessage('Address is required')
-        .isLength({ max: 200 }).withMessage('Address can be at most 200 characters long'),
+        .isLength({ max: 200 }).withMessage('Address can be at most 200 characters long')
+        
+        ,
+     
+        
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

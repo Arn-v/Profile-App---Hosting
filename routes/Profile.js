@@ -9,7 +9,7 @@ const express = require("express") ;
 const router = express.Router() ;
 
 router.get("/" , getUserProfile )  ; 
-router.post("/save" , validateUserProfile ,saveProfile) ; 
+router.post("/save" , validateUserProfile , saveProfile) ; 
 
 
 module.exports = router ;  
