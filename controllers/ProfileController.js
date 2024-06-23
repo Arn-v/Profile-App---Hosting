@@ -12,9 +12,8 @@ exports.getUserProfile = async(req,res) =>
 {
    try
     {
-     const { id } = req.user ;
 
-     const userProfileData = await User.findById( id ) ; 
+     const userProfileData = await User.find(  ) ; 
 
      if(!userProfileData){
         return res.status(404).json({ success:false , 
