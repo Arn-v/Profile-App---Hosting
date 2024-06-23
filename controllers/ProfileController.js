@@ -13,7 +13,7 @@ exports.getUserProfile = async(req,res) =>
    try
     {
 
-     const userProfileData = await User.find(  ) ; 
+     const userProfileData = await User.findOne(   ) ; 
 
      if(!userProfileData){
         return res.status(404).json({ success:false , 
@@ -68,7 +68,7 @@ exports.saveProfile = async(req,res) =>
     // VALIDATION LEFT 
 
 
-    const userProfile = await User.findOne( { email:email })
+    const userProfile = await User.findOne( { email:email } )
 
    if( userProfile )
      { 
@@ -97,47 +97,51 @@ exports.saveProfile = async(req,res) =>
         user = user.toObject(); 
 
         //now creating a JWT for AuthN 
-        const payload = {
-            name:user.firstName, 
-            email:user.email,
-            id:user._id
-              };
+        // const payload = {
+        //     name:user.firstName, 
+        //     email:user.email,
+        //     id:user._id
+        //       };
 
 
-      console.log("token created") ; 
+      // console.log("token created") ; 
 
       
-      
 
 
+      // const jwt = require("jsonwebtoken") ; 
 
-      const jwt = require("jsonwebtoken") ; 
-
-      let token =  jwt.sign(payload, 
-          process.env.JWT_SECRET,
-          {
-              expiresIn:"5h",
-          });
+      // let token =  jwt.sign(payload, 
+      //     process.env.JWT_SECRET,
+      //     {
+      //         expiresIn:"5h",
+      //     });
 
           
       // user = user.toObject();
-      user.token = token;
+      // user.token = token;
 
-      const options = {
-          expires: new Date( Date.now() + 3*24*60*60*1000),
-          httpOnly:true,
-          secure: true, // Ensure the cookie is only used with HTTPS
-          sameSite: 'None' // Ensure the cookie is sent in cross-site requests
+      // const options = {
+      //     expires: new Date( Date.now() + 3*24*60*60*1000),
+      //     httpOnly:true,
+      //     secure: true, // Ensure the cookie is only used with HTTPS
+      //     sameSite: 'None' // Ensure the cookie is sent in cross-site requests
 
-      }
+      // }
 
     // creating a cookie & sending  in the response 
-    return res.cookie("token", token, options).status(200).json({
-      success: true,
-      token,
-      user,
-      message: 'User profile created successfully',
-      });
+    // return res.cookie("token", token, options).status(200).json({
+    //   success: true,
+    //   token,
+    //   user,
+    //   message: 'User profile created successfully',
+    //   });
+     return res.status(200).json (
+      { success : true , 
+        message: 'User profile created successfully' ,
+        data : user 
+      }
+     )
 
   }
 
