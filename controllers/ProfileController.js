@@ -72,7 +72,7 @@ exports.saveProfile = async(req,res) =>
 
    if( userProfile )
      { 
-      const updatedProfile = await User.findAndUpdate( {} , newProfileData , { new:true }) ; 
+      const updatedProfile = await User.findOneAndUpdate( {} , newProfileData , { new:true }) ; 
 
       //successful response case
       res.status(200).json({ success:true, 
