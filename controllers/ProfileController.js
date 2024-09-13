@@ -92,7 +92,8 @@ exports.saveProfile = async(req,res) =>
     console.log('Received data:', req.body);  // Log received data
     console.log('Received files:', req.files);  // Log received files
 
-    const { firstName, lastName, email, address } = req.body;
+    const profileData = JSON.parse(req.body.profileData);
+    const { firstName, lastName, email, address } = profileData;
 
     // Validate required fields
     if (!firstName || !lastName || !email) {
@@ -101,15 +102,7 @@ exports.saveProfile = async(req,res) =>
         message: "First name, last name, and email are required fields"
       });
     }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid email format"
-      });
-    }
+g
 
     let profilePictureUrl = null;
     if (req.files && req.files.profilePicture) {
