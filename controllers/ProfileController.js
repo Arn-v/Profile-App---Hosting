@@ -69,26 +69,55 @@ exports.saveProfile = async(req,res) =>
 {
   try
   {
-    const profilePicture = req.file ? req.file.profilePicture : null ; 
+    // const profilePicture = req.file ? req.file.profilePicture : null ; 
     //req.file 
     
     // const {id} = req.body.profileData ; 
-    let profilePictureUrl = null;
+    // let profilePictureUrl = null;
 
-    const {firstName,lastName, email, address  } = req.body.profileData  ; 
+    // const {firstName,lastName, email, address  } = req.body.profileData  ; 
 
-    if (req.files) {
-        // Upload the profile picture to Cloudinary
-        const result = await cloudinary.uploader.upload(rofilePicture.path, {
-            folder: "profileApp",
-        }); 
-        profilePictureUrl = result.secure_url;  
-      }
+    // if (req.files) {
+    //     // Upload the profile picture to Cloudinary
+    //     const result = await cloudinary.uploader.upload(rofilePicture.path, {
+    //         folder: "profileApp",
+    //     }); 
+    //     profilePictureUrl = result.secure_url;  
+    //   }
 
     //   if (req.file) {
     //     const result = await cloudinary.uploader.upload(req.file.path, { folder: 'profileApp' });
     //     profilePictureUrl = result.secure_url;
     // }
+    console.log('Received data:', req.body);  // Log received data
+    console.log('Received files:', req.files);  // Log received files
+
+    const { firstName, lastName, email, address } = req.body;
+
+    // Validate required fields
+    if (!firstName || !lastName || !email) {
+      return res.status(400).json({
+        success: false,
+        message: "First name, last name, and email are required fields"
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email format"
+      });
+    }
+
+    let profilePictureUrl = null;
+    if (req.files && req.files.profilePicture) {
+      const result = await cloudinary.uploader.upload(req.files.profilePicture.path, {
+        folder: "profileApp",
+      });
+      profilePictureUrl = result.secure_url;
+    }
 
 
       const newProfileData = {
