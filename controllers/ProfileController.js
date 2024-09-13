@@ -3,6 +3,8 @@ const User = require("../models/User") ;
 require("dotenv").config() ;
 
 
+
+
 const cloudinary = require("cloudinary").v2 ; 
 
 cloudinary.config({ 
@@ -67,19 +69,25 @@ exports.saveProfile = async(req,res) =>
 {
   try
   {
-    const profilePicture = req.files ? req.files.filename : null; 
+    const profilePicture = req.files ? req.files.profilePicture : null; 
     
     // const {id} = req.body.profileData ; 
+    let profilePictureUrl = null;
 
     const {firstName,lastName, email, address  } = req.body.profileData  ; 
 
-    if (req.file) {
+    if (req.files) {
         // Upload the profile picture to Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: "profile_pictures",
-        });
-        profilePictureUrl = result.secure_url;  // Get the image URL from Cloudinary
+            folder: "profileApp",
+        }); 
+        profilePictureUrl = result.secure_url;  
       }
+
+    //   if (req.file) {
+    //     const result = await cloudinary.uploader.upload(req.file.path, { folder: 'profileApp' });
+    //     profilePictureUrl = result.secure_url;
+    // }
 
 
       const newProfileData = {
@@ -92,7 +100,6 @@ exports.saveProfile = async(req,res) =>
 
     
     // VALIDATION LEFT 
-
 
     const userProfile = await User.findOne( )
 
