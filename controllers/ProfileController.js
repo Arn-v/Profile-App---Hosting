@@ -67,7 +67,7 @@ exports.saveProfile = async(req,res) =>
 {
   try
   {
-    const profilePicture = req.file ? req.file.filename : null;
+    const profilePicture = req.files ? req.files.filename : null; 
     
     // const {id} = req.body.profileData ; 
 
