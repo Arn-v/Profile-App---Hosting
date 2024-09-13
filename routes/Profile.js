@@ -22,7 +22,7 @@ const upload = multer({ storage });
 
 
 router.get("/" , getUserProfile )  ; 
-router.post("/save" , validateUserProfile , saveProfile) ; 
+router.post("/save" , upload.single('profilePicture') ,  validateUserProfile , saveProfile) ; 
 
 
 module.exports = router ;  
