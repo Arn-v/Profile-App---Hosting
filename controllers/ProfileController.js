@@ -79,7 +79,7 @@ exports.saveProfile = async(req,res) =>
 
     if (req.files) {
         // Upload the profile picture to Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path, {
+        const result = await cloudinary.uploader.upload(rofilePicture.path, {
             folder: "profileApp",
         }); 
         profilePictureUrl = result.secure_url;  
