@@ -3,6 +3,16 @@ const User = require("../models/User") ;
 require("dotenv").config() ;
 
 
+const cloudinary = require("cloudinary").v2 ; 
+
+cloudinary.config({ 
+  cloud_name: 'da7bxgnwd', 
+  api_key: '529635673796622', 
+  api_secret: '301Tl8LqzkYvzIfdcmAKF5zZCPU' // Click 'View API Keys' above to copy your API secret
+});
+
+
+
 // JSON Web Token -> email_id , id 
 
 
@@ -57,12 +67,28 @@ exports.saveProfile = async(req,res) =>
 {
   try
   {
+    const profilePicture = req.file ? req.file.filename : null;
     
     // const {id} = req.body.profileData ; 
 
-    const newProfileData = req.body.profileData ; 
+    const {firstName,lastName, email, address  } = req.body.profileData  ; 
 
-    const {firstName,lastName, email, address , profilePicture } = req.body.profileData  ; 
+    if (req.file) {
+        // Upload the profile picture to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: "profile_pictures",
+        });
+        profilePictureUrl = result.secure_url;  // Get the image URL from Cloudinary
+      }
+
+
+      const newProfileData = {
+          firstName,
+          lastName,
+          email,
+          address,
+          profilePicture: profilePictureUrl || req.body.profileData.profilePicture // Use the new image if uploaded
+      };
 
     
     // VALIDATION LEFT 

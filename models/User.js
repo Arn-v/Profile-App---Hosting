@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
 
        address : { type:String , required:true } , 
 
-       profilePicture : {  type:String ,  required:true } 
+       profilePicture : {  type:String } 
 
 
     }
