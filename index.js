@@ -14,25 +14,31 @@ app.use(express.json()) ;
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-const cors = require("cors") ;
+const cors = require('cors') ; 
+app.use(cors({
+  origin: 'https://profile-orcin-gamma.vercel.app',
+  credentials: true
+}));
 
-const allowedOrigins = [
-    'https://profile-orcin-gamma.vercel.app'
-  ];
+// const cors = require("cors") ;
 
-const corsOptions = {
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-  };
+// const allowedOrigins = [
+//     ''
+//   ];
 
-app.use( cors(corsOptions) ) ; 
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials: true
+//   };
+
+// app.use( cors(corsOptions) ) ; 
 
 
 // const allowedOrigin = 'https://profile-orcin-gamma.vercel.app'; // Update with your frontend URL
