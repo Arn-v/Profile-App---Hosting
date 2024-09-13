@@ -7,7 +7,7 @@ exports.auth = (req, res, next) =>
     try{
         //extract JWT token from req to validate user 
        
-        const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "");
+        const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", " ");
 
         console.log( token) ; 
         

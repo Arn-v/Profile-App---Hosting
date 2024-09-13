@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema(
 
        email: { type:String , required:true } , 
 
-       address : { type:String , required:true } 
+       address : { type:String , required:true } , 
+
+       profilePicture : {  type:String ,  required:true } 
+
+
     }
 )
 

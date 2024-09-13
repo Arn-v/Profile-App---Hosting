@@ -62,7 +62,7 @@ exports.saveProfile = async(req,res) =>
 
     const newProfileData = req.body.profileData ; 
 
-    const {firstName,lastName, email, address} = req.body.profileData  ; 
+    const {firstName,lastName, email, address , profilePicture } = req.body.profileData  ; 
 
     
     // VALIDATION LEFT 
@@ -89,7 +89,7 @@ exports.saveProfile = async(req,res) =>
 
       //create new entry for User
        let user = await User.create( {
-                                        firstName,lastName,email,address
+                                        firstName,lastName,email,address,profilePicture
                                         })
 
         console.log(user) ; 
