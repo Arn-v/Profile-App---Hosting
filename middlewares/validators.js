@@ -1,6 +1,6 @@
-const { check, validationResult } = require('express-validator');
+const { check, body ,  validationResult } = require('express-validator');
 
-exports.validateUserProfile = exports.validateUserProfile = [
+exports.validateUserProfile = [ 
     body('profileData.firstName').notEmpty().withMessage('First name is required'),
     body('profileData.lastName').notEmpty().withMessage('Last name is required'),
     body('profileData.email').isEmail().withMessage('Email must be valid'),
