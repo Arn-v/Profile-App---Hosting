@@ -63,7 +63,7 @@ app.use(cors({
 
 
 const profileRoutes = require("./routes/Profile") ; 
-app.use("/api/profile" , profileRoutes) ; 
+app.use("/api/profile" , profileRoutes ) ; 
 
 
 const DBconnect = require("./config/database.js") ; 

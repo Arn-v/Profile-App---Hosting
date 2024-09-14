@@ -16,13 +16,36 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage }) ;
+
+// const storage = multer.memoryStorage();  // Store file in memory
+
+// const upload = multer({ storage });
+
+// const upload = multer({ 
+//     storage,
+//     limits: { fileSize: 5 * 1024 * 1024 },  // Limit file size to 5MB
+//     fileFilter: (req, file, cb) => {
+//         const filetypes = "/jpeg|jpg|png/";  // Only allow JPEG and PNG files
+//         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//         const mimetype = filetypes.test(file.mimetype);
+        
+//         if (extname && mimetype) {
+//             return cb(null, true);
+//         } else {
+//             cb(new Error('Only images of type JPG, JPEG, and PNG are allowed!'));
+//         }
+//     }
+// });
+
 
 
 
 
 router.get("/" , getUserProfile )  ; 
-router.post("/save" , upload.single('profilePicture') ,  validateUserProfile , saveProfile) ; 
+router.post("/save" , upload.single('profilePicture') ,  saveProfile) ; 
+// validateUserProfile 
+
 
 
 module.exports = router ;  

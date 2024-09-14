@@ -69,26 +69,7 @@ exports.saveProfile = async(req,res) =>
 {
   try
   {
-    // const profilePicture = req.file ? req.file.profilePicture : null ; 
-    //req.file 
-    
-    // const {id} = req.body.profileData ; 
-    // let profilePictureUrl = null;
 
-    // const {firstName,lastName, email, address  } = req.body.profileData  ; 
-
-    // if (req.files) {
-    //     // Upload the profile picture to Cloudinary
-    //     const result = await cloudinary.uploader.upload(rofilePicture.path, {
-    //         folder: "profileApp",
-    //     }); 
-    //     profilePictureUrl = result.secure_url;  
-    //   }
-
-    //   if (req.file) {
-    //     const result = await cloudinary.uploader.upload(req.file.path, { folder: 'profileApp' });
-    //     profilePictureUrl = result.secure_url;
-    // }
     console.log('Received data:', req.body);  // Log received data
     console.log('Received files:', req.files);  // Log received files
 
@@ -96,17 +77,17 @@ exports.saveProfile = async(req,res) =>
     const { firstName, lastName, email, address } = profileData;
 
     // Validate required fields
-    if (!firstName || !lastName || !email) {
+    if (!firstName || !lastName || !email || !address) {
       return res.status(400).json({
         success: false,
         message: "First name, last name, and email are required fields"
       });
     }
-g
 
     let profilePictureUrl = null;
-    if (req.files && req.files.profilePicture) {
-      const result = await cloudinary.uploader.upload(req.files.profilePicture.path, {
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "profileApp",
       });
       profilePictureUrl = result.secure_url;
@@ -118,7 +99,7 @@ g
           lastName,
           email,
           address,
-          profilePicture: profilePictureUrl || req.body.profileData.profilePicture // Use the new image if uploaded
+          profilePicture: profilePictureUrl || "" // Use the new image if uploaded
       };
 
     
@@ -206,13 +187,13 @@ g
 
 
    catch(error){
-       console.log(error)
-       console.error(error) 
+       console.log(error) ; 
+       console.error(error) ; 
 
        res.status(500).json(
          { success:false , 
-          message:"Internal Server Error " ,
-          data: error 
+          message:"Internal Server Error "  ,
+          data: error.message 
          })
     }
 
