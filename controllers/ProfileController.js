@@ -75,7 +75,7 @@ exports.saveProfile = async(req,res) =>
 
     const profileData = JSON.parse(req.body.profileData);
     const { firstName, lastName, email, address } = profileData;
-
+ 
     // Validate required fields
     if (!firstName || !lastName || !email || !address) {
       return res.status(400).json({
@@ -216,8 +216,8 @@ exports.clearProfileData = async ( req , res ) => {
      }
 
 
-      const clearedUserProfile = await User.findOneAndUpdate( {} ,  { firstName: '', lastName: '' , email:'' , address:'' }, 
-                                                                  { new: true } ) ;  
+      const clearedUserProfile = await User.findOneAndUpdate( {} ,  { firstName: '', lastName: '' , email:'' , address:'' , profilePicture:"https://res.cloudinary.com/da7bxgnwd/image/upload/v1726326513/default-avatar-icon_awgzwb.jpg" }, 
+                                                                  { new: true } ) ;   
 
 
      //successful response case
@@ -241,6 +241,29 @@ exports.clearProfileData = async ( req , res ) => {
        )
     }
 
+}
+
+
+
+exports.imageUpload = async(req,res) => {
+
+  try
+  {
+
+
+  }
+
+  catch(error){
+    console.log(error)
+    console.error(error) 
+
+    res.status(500).json(
+      { success:false , 
+        message:"Internal Server Error " ,
+        data: error 
+      }
+     )
+  }
 }
 
 
