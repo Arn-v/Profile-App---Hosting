@@ -201,6 +201,49 @@ exports.saveProfile = async(req,res) =>
 }
 
 
+//Handler for clearing the information 
+exports.clearProfileData = async ( req , res ) => {
+
+  try
+    {
+
+     const userProfileData = await User.findOne(  ) ; 
+
+     if(!userProfileData){
+        return res.status(404).json({ success:false , 
+                                    message:"Profile Data Not Found "
+                                    } ) 
+     }
+
+
+      const clearedUserProfile = await User.findOneAndUpdate( {} ,  { firstName: '', lastName: '' , email:'' , address:'' }, 
+                                                                  { new: true } ) ;  
+
+
+     //successful response case
+      res.status(200).json({ success:true, 
+                                 data:clearedUserProfile , 
+                                 message:"Profile Data Succesffully Cleared "
+                                } ) 
+
+    }
+
+
+    catch(error){
+      console.log(error)
+      console.error(error) 
+
+      res.status(500).json(
+        { success:false , 
+          message:"Internal Server Error " ,
+          data: error 
+        }
+       )
+    }
+
+}
+
+
 
 
 

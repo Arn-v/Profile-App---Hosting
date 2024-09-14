@@ -1,4 +1,4 @@
-const { getUserProfile, saveProfile } = require('../controllers/ProfileController')
+const { getUserProfile , clearProfileData , saveProfile } = require('../controllers/ProfileController')
 const { auth } = require('../middlewares/auth');
 const { validateUserProfile } = require('../middlewares/validators');
 
@@ -43,6 +43,7 @@ const upload = multer({ storage }) ;
 
 
 router.get("/" , getUserProfile )  ; 
+router.post("/reset" , clearProfileData) ; 
 router.post("/save" , upload.single('profilePicture') ,  saveProfile) ; 
 // validateUserProfile 
 
