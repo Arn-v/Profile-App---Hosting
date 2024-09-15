@@ -74,7 +74,7 @@ exports.saveProfile = async(req,res) =>
     console.log('Received files:', req.files);  // Log received files
 
     const profileData = JSON.parse(req.body.profileData);
-    const { firstName, lastName, email, address } = profileData ;
+    const { firstName, lastName, email, address } = profileData;
  
     // Validate required fields
     if (!firstName || !lastName || !email || !address) {
@@ -99,7 +99,7 @@ exports.saveProfile = async(req,res) =>
           lastName,
           email,
           address,
-          profilePicture: profilePictureUrl 
+          profilePicture : profilePictureUrl || "" // Use the new image if uploaded
       };
 
     
@@ -126,7 +126,8 @@ exports.saveProfile = async(req,res) =>
 
       //create new entry for User
        let user = await User.create( {
-                                        firstName,lastName,email,address,profilePicture
+                                        firstName,lastName,email,address,
+                                        profilePicture:profilePictureUrl 
                                         })
 
         console.log(user) ; 
