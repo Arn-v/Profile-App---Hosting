@@ -74,7 +74,7 @@ exports.saveProfile = async(req,res) =>
     console.log('Received files:', req.files);  // Log received files
 
     const profileData = JSON.parse(req.body.profileData);
-    const { firstName, lastName, email, address } = profileData;
+    const { firstName, lastName, email, address } = profileData ;
  
     // Validate required fields
     if (!firstName || !lastName || !email || !address) {
@@ -92,9 +92,6 @@ exports.saveProfile = async(req,res) =>
       });
       profilePictureUrl = result.secure_url;
     }
-    else{
-      profilePictureUrl = "https://res.cloudinary.com/da7bxgnwd/image/upload/v1726326513/default-avatar-icon_awgzwb.jpg" ; 
-    }
 
 
       const newProfileData = {
@@ -102,7 +99,7 @@ exports.saveProfile = async(req,res) =>
           lastName,
           email,
           address,
-          profilePicture: profilePictureUrl  // Use the new image if uploaded
+          profilePicture: profilePictureUrl 
       };
 
     
