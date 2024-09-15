@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
 
        address : { type:String , required:true } , 
 
-       profilePicture : {  type:String  , default:"https://res.cloudinary.com/da7bxgnwd/image/upload/v1726326513/default-avatar-icon_awgzwb.jpg"  } 
+       profilePicture : {  type:String  , default:"https://res.cloudinary.com/da7bxgnwd/image/upload/v1726326513/default-avatar-icon_awgzwb.jpgs"  } 
 
 
     }
