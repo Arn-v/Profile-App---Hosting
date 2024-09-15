@@ -94,13 +94,16 @@ exports.saveProfile = async(req,res) =>
     }
 
 
-      const newProfileData = {
-          firstName,
-          lastName,
-          email,
-          address,
-          profilePicture : profilePictureUrl || "" // Use the new image if uploaded
-      };
+      // const newProfileData = {
+      //     firstName,
+      //     lastName,
+      //     email,
+      //     address,
+      //     profilePicture : profilePictureUrl || "" // Use the new image if uploaded
+      // };
+
+
+
 
     
     // VALIDATION LEFT 
@@ -109,6 +112,16 @@ exports.saveProfile = async(req,res) =>
 
    if( userProfile )
      { 
+      const prevProfilePicture = userProfile.profilePicture ; 
+
+      const newProfileData = {
+        firstName,
+        lastName,
+        email,
+        address,
+        profilePicture : profilePictureUrl || prevProfilePicture // Use the new image if uploaded
+            };
+
       const updatedProfile = await User.findOneAndUpdate( {} , newProfileData , { new:true }) ; 
 
       //successful response case
@@ -127,7 +140,7 @@ exports.saveProfile = async(req,res) =>
       //create new entry for User
        let user = await User.create( {
                                         firstName,lastName,email,address,
-                                        profilePicture:profilePictureUrl 
+                                        profilePicture:profilePictureUrl
                                         })
 
         console.log(user) ; 
